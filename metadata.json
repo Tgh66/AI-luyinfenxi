@@ -1,0 +1,7 @@
+{
+  "name": "Copy of SalesIQ - Coaching Intelligence",
+  "description": "An AI-powered sales coaching platform that analyzes audio calls to provide diarized transcripts, sentiment analysis graphs, and actionable performance feedback.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
