@@ -56,7 +56,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onRecordingComplete, disa
       
     } catch (err) {
       console.error("Error accessing microphone:", err);
-      alert("Could not access microphone. Please ensure you have granted permission.");
+      alert("无法访问麦克风，请确保已授予权限。");
     }
   };
 
@@ -82,19 +82,19 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onRecordingComplete, disa
         <div className="bg-purple-100 p-4 rounded-full mb-4">
             <MicrophoneIcon className="w-8 h-8 text-purple-600" />
         </div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">Record Audio</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-2">录制音频</h3>
         
         {!isRecording ? (
              <div className="flex flex-col items-center w-full">
                  <p className="text-gray-500 text-center max-w-sm mb-4">
-                    Record your conversation directly from your browser.
+                    直接在浏览器中录制您的对话。
                  </p>
                  <button 
                     onClick={startRecording}
                     disabled={disabled}
                     className="bg-purple-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-purple-700 transition-colors w-full sm:w-auto"
                  >
-                    Start Recording
+                    开始录音
                  </button>
              </div>
         ) : (
@@ -108,7 +108,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onRecordingComplete, disa
                     className="flex items-center justify-center gap-2 bg-white text-red-600 border border-red-200 px-6 py-2 rounded-lg font-medium hover:bg-red-50 transition-colors w-full sm:w-auto"
                 >
                     <StopCircleIcon className="w-5 h-5" />
-                    <span>Stop Recording</span>
+                    <span>停止录音</span>
                 </button>
             </div>
         )}

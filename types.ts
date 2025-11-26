@@ -1,3 +1,4 @@
+
 export interface TranscriptLine {
   speaker: string;
   text: string;
@@ -28,7 +29,17 @@ export interface AnalysisResult {
 
 export enum AppState {
   IDLE = 'IDLE',
-  ANALYZING = 'ANALYZING',
-  COMPLETE = 'COMPLETE',
-  ERROR = 'ERROR',
+  // ANALYZING and ERROR states are now managed per Job in the new architecture
+  WORKSPACE = 'WORKSPACE', 
+}
+
+export type JobStatus = 'pending' | 'analyzing' | 'completed' | 'error';
+
+export interface AnalysisJob {
+  id: string;
+  file: File;
+  status: JobStatus;
+  result?: AnalysisResult;
+  error?: string;
+  createdAt: number;
 }

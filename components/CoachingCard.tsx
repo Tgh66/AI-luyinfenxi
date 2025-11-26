@@ -14,7 +14,7 @@ const CoachingCard: React.FC<CoachingCardProps> = ({ strengths, improvements }) 
       <div className="bg-green-50 rounded-xl p-6 border border-green-100">
         <div className="flex items-center gap-2 mb-4">
             <CheckCircleIcon className="w-6 h-6 text-green-600" />
-            <h3 className="font-semibold text-green-900">Winning Moments</h3>
+            <h3 className="font-semibold text-green-900">精彩时刻 (亮点)</h3>
         </div>
         <div className="space-y-4">
           {strengths.map((item, idx) => (
@@ -30,7 +30,7 @@ const CoachingCard: React.FC<CoachingCardProps> = ({ strengths, improvements }) 
       <div className="bg-orange-50 rounded-xl p-6 border border-orange-100">
         <div className="flex items-center gap-2 mb-4">
             <AlertCircleIcon className="w-6 h-6 text-orange-600" />
-            <h3 className="font-semibold text-orange-900">Missed Opportunities</h3>
+            <h3 className="font-semibold text-orange-900">错失良机 (改进)</h3>
         </div>
         <div className="space-y-4">
           {improvements.map((item, idx) => (

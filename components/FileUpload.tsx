@@ -1,12 +1,13 @@
-import React, { useCallback } from 'react';
+
+import React from 'react';
 import { UploadIcon } from './Icons';
 
 interface FileUploadProps {
-  onFileSelect: (file: File) => void;
+  onFilesSelect: (files: File[]) => void;
   disabled?: boolean;
 }
 
-const FileUpload: React.FC<FileUploadProps> = ({ onFileSelect, disabled }) => {
+const FileUpload: React.FC<FileUploadProps> = ({ onFilesSelect, disabled }) => {
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
   };
@@ -14,23 +15,31 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileSelect, disabled }) => {
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     if (disabled) return;
-    const files = e.dataTransfer.files;
-    if (files && files.length > 0) {
-      validateAndUpload(files[0]);
+    
+    const droppedFiles = Array.from(e.dataTransfer.files);
+    if (droppedFiles.length > 0) {
+      validateAndUpload(droppedFiles);
     }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      validateAndUpload(e.target.files[0]);
+      const selectedFiles = Array.from(e.target.files);
+      validateAndUpload(selectedFiles);
     }
   };
 
-  const validateAndUpload = (file: File) => {
-    if (file.type.startsWith('audio/')) {
-      onFileSelect(file);
-    } else {
-      alert('Please upload a valid audio file.');
+  const validateAndUpload = (files: File[]) => {
+    const validFiles = files.filter(file => file.type.startsWith('audio/'));
+    
+    if (validFiles.length !== files.length) {
+      alert(`已忽略 ${files.length - validFiles.length} 个非音频文件。`);
+    }
+
+    if (validFiles.length > 0) {
+      onFilesSelect(validFiles);
+    } else if (files.length > 0) {
+        alert('请上传有效的音频文件 (MP3, WAV, M4A)。');
     }
   };
 
@@ -47,6 +56,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileSelect, disabled }) => {
         type="file"
         id="audio-upload"
         accept="audio/*"
+        multiple
         className="hidden"
         onChange={handleInputChange}
         disabled={disabled}
@@ -55,13 +65,13 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileSelect, disabled }) => {
         <UploadIcon className="w-8 h-8 text-blue-600" />
       </div>
       <h3 className="text-lg font-semibold text-gray-900 mb-2">
-        Upload Sales Call Recording
+        批量上传销售录音
       </h3>
       <p className="text-gray-500 text-center max-w-sm mb-4">
-        Drag and drop your audio file here (MP3, WAV, M4A), or click to browse.
+        拖放多个音频文件到此处 (MP3, WAV, M4A)，或点击选择。
       </p>
       <button className="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-        Select File
+        选择文件
       </button>
     </div>
   );

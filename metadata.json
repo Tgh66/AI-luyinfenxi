@@ -1,6 +1,6 @@
 {
-  "name": "Copy of SalesIQ - Coaching Intelligence",
-  "description": "An AI-powered sales coaching platform that analyzes audio calls to provide diarized transcripts, sentiment analysis graphs, and actionable performance feedback.",
+  "name": "SalesIQ - 销售智能教练",
+  "description": "一个由 AI 驱动的销售辅导平台，通过分析音频通话提供对话逐字稿、情感分析图表和可操作的绩效反馈。",
   "requestFramePermissions": [
     "microphone"
   ]

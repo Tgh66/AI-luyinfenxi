@@ -10,11 +10,12 @@ const TranscriptView: React.FC<TranscriptViewProps> = ({ transcript }) => {
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 h-[600px] flex flex-col">
       <div className="p-4 border-b border-gray-100 bg-gray-50 rounded-t-xl">
-        <h3 className="font-semibold text-gray-800">Transcript</h3>
+        <h3 className="font-semibold text-gray-800">对话逐字稿</h3>
       </div>
       <div className="overflow-y-auto p-4 space-y-4 custom-scrollbar flex-1">
         {transcript.map((line, index) => {
-          const isSales = line.speaker.toLowerCase().includes('sales');
+          // Check for Chinese "销售" or English "Sales" to determine side
+          const isSales = line.speaker.toLowerCase().includes('sales') || line.speaker.includes('销售');
           return (
             <div key={index} className={`flex gap-3 ${isSales ? 'flex-row-reverse' : ''}`}>
               <div

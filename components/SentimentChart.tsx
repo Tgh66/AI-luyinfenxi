@@ -19,15 +19,20 @@ interface SentimentChartProps {
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload as SentimentPoint;
+    const sentimentMap: Record<string, string> = {
+        'positive': '积极',
+        'neutral': '中性',
+        'negative': '消极'
+    };
     return (
       <div className="bg-white p-3 border border-gray-200 shadow-lg rounded-lg text-sm">
         <p className="font-bold text-gray-700 mb-1">{data.label}</p>
         <p className={`font-semibold ${
             data.score > 60 ? 'text-green-600' : data.score < 40 ? 'text-red-600' : 'text-yellow-600'
         }`}>
-          Score: {data.score}
+          分数: {data.score}
         </p>
-        <p className="text-gray-500 capitalize">{data.sentiment}</p>
+        <p className="text-gray-500 capitalize">{sentimentMap[data.sentiment] || data.sentiment}</p>
       </div>
     );
   }
@@ -38,8 +43,8 @@ const SentimentChart: React.FC<SentimentChartProps> = ({ data }) => {
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
       <div className="mb-6">
-        <h3 className="font-semibold text-gray-800">Engagement & Sentiment Analysis</h3>
-        <p className="text-sm text-gray-500">Tracking conversation positivity over time</p>
+        <h3 className="font-semibold text-gray-800">互动与情感分析</h3>
+        <p className="text-sm text-gray-500">追踪对话过程中的积极程度</p>
       </div>
       <div className="h-[250px] w-full">
         <ResponsiveContainer width="100%" height="100%">
